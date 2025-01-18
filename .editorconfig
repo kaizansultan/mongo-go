@@ -1,0 +1,22 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+max_line_length = 80
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+indent_size = 4
+indent_style = space
+trim_trailing_whitespace = false
+
+[*.go]
+# Use tabs for indentation (Go uses tabs for indentation)
+indent_style = tab
+# The tab width is not strictly defined in Go, but the Go tools and conventions
+# interpret tab as 8 characters in most environments
+tab_width = 4
+# Can be set to 4 in some editors for visual consistency, though Go uses 8
+# End of line style (LF is used across platforms in Go)
