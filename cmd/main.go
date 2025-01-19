@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"project/database"
-	// "project/routes"
+	"project/routes"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -15,7 +15,7 @@ func main() {
 
 	app := fiber.New()
 
-	// routes.RegisterUserRoutes(app)
+	routes.RegisterUserRoutes(app)
 
 	log.Println("Server is running on port 8080")
 	log.Fatal(app.Listen(":8080"))

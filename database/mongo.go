@@ -13,21 +13,23 @@ import (
 var client *mongo.Client
 
 func ConnectDB() {
+	// Load environment variables
 	if err := godotenv.Load(); err != nil {
 		log.Println(".env not found")
 	}
 
 	uri := os.Getenv("MONGODB_URI")
 	if uri == "" {
-		log.Fatal("Please set your 'MONGODB_URI' env variable")
+		log.Fatal("Please set your 'MONGODB_URI' environment variable")
 	}
 
-	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
+	var err error // Jangan gunakan := untuk menghindari shadowing
+	client, err = mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
 	if err != nil {
 		panic(err)
 	}
 
-	// Cek apakah koneksi berhasil
+	// Check if connection is successful
 	err = client.Ping(context.Background(), nil)
 	if err != nil {
 		log.Fatal("Could not connect to MongoDB:", err)
@@ -36,5 +38,11 @@ func ConnectDB() {
 }
 
 func GetCollection(name string) *mongo.Collection {
-	return client.Database("mongo-go").Collection(name)
+	// Ambil nama database dari environment variable
+	dbName := os.Getenv("MONGO_DB_NAME")
+	if dbName == "" {
+		log.Fatal("Please set your 'MONGO_DB_NAME' environment variable")
+	}
+
+	return client.Database(dbName).Collection(name)
 }

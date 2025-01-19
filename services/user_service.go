@@ -15,6 +15,10 @@ func CreateUser(user models.User) (*mongo.InsertOneResult, error) {
 	return result, err
 }
 
+/*
+bson.D -> field harus urut
+bson.M -> field tidak harus urut
+*/
 func GetUserByEmail(email string) (models.User, error) {
 	collection := database.GetCollection("users")
 	var user models.User
