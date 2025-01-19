@@ -1,6 +1,7 @@
 .env
 /bin/
 /build/
+/tmp/
 *.exe
 *.out
 *.log
