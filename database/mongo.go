@@ -10,6 +10,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+var client *mongo.Client
+
 func ConnectDB() {
 	if err := godotenv.Load(); err != nil {
 		log.Println(".env not found")
@@ -31,4 +33,8 @@ func ConnectDB() {
 		log.Fatal("Could not connect to MongoDB:", err)
 	}
 	log.Println("Successfully connected to MongoDB")
+}
+
+func GetCollection(name string) *mongo.Collection {
+	return client.Database("mongo-go").Collection(name)
 }
